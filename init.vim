@@ -73,6 +73,9 @@ Plug 'itchyny/lightline.vim'
 Plug 'ervandew/supertab'
 Plug 'kien/rainbow_parentheses.vim'
 
+" terraform
+Plug 'hashivim/vim-terraform'
+
 " themes
 Plug 'nanotech/jellybeans.vim'
 Plug 'flazz/vim-colorschemes'
@@ -84,6 +87,8 @@ colorscheme gruvbox
 
 " keybindings
 let mapleader = "\<Space>"
+nnoremap <silent> <leader>ev :edit $HOME/.config/nvim/init.vim<cr>
+nnoremap <silent> <leader>so :source $HOME/.config/nvim/init.vim<cr>
 
 nnoremap <silent> <leader>l :redraw!<cr>:nohl<cr><esc>
 nnoremap <silent> <leader>v :vsplit<cr><c-w>l
