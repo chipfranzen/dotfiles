@@ -61,13 +61,13 @@ Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
 
 " language server
-Plug 'autozimu/LanguageClient-neovim', {
-  \ 'branch': 'next',
-  \ 'do': 'bash install.sh',
-  \ }
+" Plug 'autozimu/LanguageClient-neovim', {
+"   \ 'branch': 'next',
+"   \ 'do': 'bash install.sh',
+"   \ }
 
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
+" Plug 'ncm2/ncm2'
+" Plug 'roxma/nvim-yarp'
 
 " linting
 Plug 'w0rp/ale'
@@ -218,20 +218,20 @@ au Syntax * RainbowParenthesesLoadBraces
 set completeopt=noinsert,menuone,noselect
 set shortmess+=c
 
-autocmd BufEnter * call ncm2#enable_for_buffer()
+" autocmd BufEnter * call ncm2#enable_for_buffer()
 
-inoremap <c-c> <ESC>
-inoremap <expr> <CR> pumvisible() ? "\<c-y>\<cr>" : "\<CR>"
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <c-c> <ESC>
+" inoremap <expr> <CR> pumvisible() ? "\<c-y>\<cr>" : "\<CR>"
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" language server
-let g:LanguageClient_serverCommands = {
-  \ 'python': ['pyls'],
-  \ }
+" " language server
+" let g:LanguageClient_serverCommands = {
+"   \ 'python': ['pyls'],
+"   \ }
 
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<cr>
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<cr>
+" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<cr>
+" nnoremap <silent> K :call LanguageClient#textDocument_hover()<cr>
 
 " ale
 let g:ale_sign_column_always = 1
