@@ -61,11 +61,12 @@ Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
 
 " language server
-" Plug 'autozimu/LanguageClient-neovim', {
-"   \ 'branch': 'next',
-"   \ 'do': 'bash install.sh',
-"   \ }
+Plug 'autozimu/LanguageClient-neovim', {
+  \ 'branch': 'next',
+  \ 'do': 'bash install.sh',
+  \ }
 
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'ncm2/ncm2'
 " Plug 'roxma/nvim-yarp'
 
@@ -95,9 +96,9 @@ call plug#end()
 
 " theme
 set background=dark
-colorscheme gruvbox
-" colorscheme neodark
-" let g:neodark#solid_vertsplit = 1
+" colorscheme gruvbox
+colorscheme neodark
+let g:neodark#solid_vertsplit = 1
 
 " keybindings
 let mapleader = "\<Space>"
@@ -225,13 +226,15 @@ set shortmess+=c
 " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" " language server
-" let g:LanguageClient_serverCommands = {
-"   \ 'python': ['pyls'],
-"   \ }
+" language server
+let g:LanguageClient_serverCommands = {
+  \ 'python': ['pyls'],
+  \ }
 
-" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<cr>
-" nnoremap <silent> K :call LanguageClient#textDocument_hover()<cr>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<cr>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<cr>
+inoremap <silent> <C-c> <C-x><C-o>
+
 
 " ale
 let g:ale_sign_column_always = 1
@@ -242,13 +245,11 @@ let g:ale_lint_on_insert_leave = 1
 
 let g:ale_linters = {
   \ 'python': ['flake8'],
-  \ 'go': ['gometalinter'],
   \ }
 
 let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \ 'python': ['autopep8'],
-  \ 'go': ['gofmt', 'goimports'],
+  \ 'python': ['black'],
   \ }
 
 " format json
