@@ -1,11 +1,7 @@
-" nvim settings
-set mouse=a
+" general settings
 set number
 set smartindent
 set expandtab
-set cursorline
-set hlsearch
-set colorcolumn=100
 
 set shiftwidth=2
 set softtabstop=2
@@ -22,180 +18,246 @@ set undoreload=10000
 set undodir=$HOME/.config/nvim/undo
 
 set wildmode=longest,list:longest
-set tags+=./.git/tags
+set inccommand=nosplit
 
 set lazyredraw
 set noshowmode
+set cursorline
+set smartcase
+
+set hlsearch
+nnoremap <CR> :noh<CR><CR>
 
 set noerrorbells visualbell t_vb=
 
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 
+" disable automatic commenting
+autocmd FileType * setlocal formatoptions-=cro
+set formatoptions-=cro
 
-"This unsets the "last search pattern" register by hitting return
-nnoremap <CR> :noh<CR><CR>
+set mouse=a
+
+" plugins
+call plug#begin($HOME . '/.config/nvim/plugged')
+
+" junegunn
+Plug 'junegunn/fzf', {
+  \ 'dir': '~/.fzf',
+  \ 'do': './install --all',
+  \ }
+Plug 'junegunn/fzf.vim'
+
+" tpope
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
+
+" languages
+Plug 'hashivim/vim-terraform'
+Plug 'ekalinin/Dockerfile.vim'
+
+" language server
+Plug 'autozimu/LanguageClient-neovim', {
+  \ 'branch': 'next',
+  \ 'do': 'bash install.sh',
+  \ }
+
+" auto complete
+Plug 'ncm2/ncm2'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'roxma/nvim-yarp'
+
+" linting
+Plug 'w0rp/ale'
+
+" lightline
+Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
+
+" utilities
+Plug 'jremmen/vim-ripgrep'
+Plug 'sgur/vim-editorconfig'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'mhinz/vim-signify'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'kien/rainbow_parentheses.vim'
+
+" themes
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'KeitaNakamura/neodark.vim'
+
+call plug#end()
+
+" colorscheme
+set background=dark
+colorscheme neodark
+let g:neodark#solid_vertsplit = 1
 
 if (has("termguicolors"))
   set termguicolors
 endif
 
-if (has("guifont"))
-  set guifont=Fira\ Code
-endif
+" python remote plugin
+let g:python_host_prog='/usr/local/bin/python2'
+let g:python3_host_prog='/Library/Frameworks/Python.framework/Versions/3.6/bin/python3'
 
-set inccommand=nosplit
+" auto complete
+set completeopt=noinsert,menuone,noselect
+set shortmess+=c
 
-call plug#begin($HOME . '/.config/nvim/plugged')
+inoremap <c-c> <ESC>
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" junegunn
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align'
+autocmd BufEnter * call ncm2#enable_for_buffer()
 
-" tpope
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-vinegar'
+" language server
+let g:LanguageClient_diagnosticsEnable = 0
+let g:LanguageClient_serverCommands = {
+  \ 'python': ['pyls'],
+  \ }
 
-" ruby
-Plug 'vim-ruby/vim-ruby'
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<cr>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<cr>
 
-" utilities
-Plug 'neomake/neomake'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'itchyny/lightline.vim'
-Plug 'ervandew/supertab'
-Plug 'kien/rainbow_parentheses.vim'
+" ale
+let g:ale_sign_column_always = 1
+let g:ale_linters_explicit = 1
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_insert_leave = 1
+let g:ale_set_highlights = 0
 
-" terraform
-Plug 'hashivim/vim-terraform'
+let g:ale_sign_warning = ''
+let g:ale_sign_error = ''
 
-" themes
-Plug 'nanotech/jellybeans.vim'
-Plug 'flazz/vim-colorschemes'
-call plug#end()
 
-" theme
-set background=dark
-colorscheme gruvbox
+let g:ale_linters = {
+  \ 'python': ['flake8'],
+  \ }
 
-" keybindings
+let g:ale_fixers = {
+  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \ 'python': ['isort', 'black'],
+  \ 'json': ['prettier'],
+  \ 'markdown': ['prettier'],
+  \ 'yaml': ['prettier'],
+  \ }
+
+" gutentags
+let g:gutentags_exclude_filetypes = ['gitcommit', 'vim']
+
+" signify
+let g:signify_vcs_list = ['git']
+
+" lightline
+let g:lightline = {
+  \ 'colorscheme': 'neodark',
+  \ 'active': {
+  \   'left': [['mode', 'paste'],
+  \            ['fugitive', 'filename', 'filetype']],
+  \   'right': [['lineinfo'], ['percent'],
+  \             ['linter_errors', 'linter_warnings']],
+  \ },
+  \ 'component_function': {
+  \   'mode': 'LightLineMode',
+  \   'filename': 'LightLineFilename',
+  \   'fugitive': 'LightLineFugitive',
+  \   'fileformat': 'LightLineFileformat',
+  \   'filetype': 'LightLineFiletype',
+  \ },
+  \ 'component_expand': {
+  \   'linter_warnings': 'lightline#ale#warnings',
+  \   'linter_errors': 'lightline#ale#errors',
+  \ },
+  \ 'component_type': {
+  \   'linter_warnings': 'warning',
+  \   'linter_errors': 'error',
+  \ },
+  \ 'separator': { 'left': '', 'right': '' },
+	\ 'subseparator': { 'left': '', 'right': '' },
+  \ }
+
+let g:lightline#ale#indicator_warnings = ' '
+let g:lightline#ale#indicator_errors = ' '
+
+function! LightLineMode()
+  return winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+function! LightLineFilename()
+  let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+  let modified = &modified ? ' +' : ''
+  return filename . modified
+endfunction
+
+function! LightLineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightLineFiletype()
+  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightLineFugitive()
+  let _ = fugitive#head()
+  return strlen(_) ? ' '._ : ''
+endfunction
+
+" standard keybindings
 let mapleader = "\<Space>"
-nnoremap <silent> <leader>ev :edit $HOME/.config/nvim/init.vim<cr>
-nnoremap <silent> <leader>so :source $HOME/.config/nvim/init.vim<cr>
+
+nnoremap <silent> <leader>et :edit $HOME/.tmux.conf<cr>
+nnoremap <silent> <leader>ez :edit $HOME/.zshrc<cr>
+nnoremap <silent> <leader>ev :edit $MYVIMRC<cr>
+nnoremap <silent> <leader>sv :source $MYVIMRC<cr>
 
 nnoremap <silent> <leader>l :redraw!<cr>:nohl<cr><esc>
 nnoremap <silent> <leader>v :vsplit<cr><c-w>l
 nnoremap <silent> <leader>h :split<cr><c-w>j
 nnoremap <silent> <leader>w :write<cr>
 nnoremap <silent> <leader>q :quit<cr>
-nnoremap <silent> <leader>Q :qall<cr>
+
+nnoremap <silent> <c-h> <c-w>h
+nnoremap <silent> <c-j> <c-w>j
+nnoremap <silent> <c-k> <c-w>k
+nnoremap <silent> <c-l> <c-w>l
+
+nnoremap <silent> Y y$
+
+nnoremap <silent> j gj
+nnoremap <silent> k gk
+
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+
+nnoremap <silent> <c-d> <c-d>zz
+nnoremap <silent> <c-u> <c-u>zz
+
+noremap <silent> <leader>sy "*y
+
+cnoremap <c-a> <home>
+cnoremap <c-e> <end>
+cnoremap <c-f> <right>
+cnoremap <c-b> <left>
 
 " fzf
-nnoremap <silent> <leader>p :call fzf#run({ 'source': 'ag -g ""', 'sink': 'e', 'window': 'enew' })<cr>
-
-" easy align
-vmap <silent> <cr> <Plug>(EasyAlign)
+nnoremap <silent> <leader>p :call fzf#run({ 'source': 'rg --files', 'sink': 'e', 'window': 'enew' })<cr>
 
 " ag
-nnoremap <leader>a :Ag<space>
-
-" copy/paste from system clipboard (osx)
-noremap <silent> <leader>sy "*y
-noremap <silent> <leader>sp "*p
-noremap <silent> <leader>sY "*y
-noremap <silent> <leader>sP "*P
-
-" grep under cursor
-nnoremap <silent> <leader>* :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-" configure grep to use ag
-set grepprg=ag\ --nogroup\ --nocolor
-
-" vim-ruby
-let ruby_operators = 1
-let g:rubycomplete_buffer_loading = 1
-let g:rubycomplete_classes_in_global = 1
-let g:rubycomplete_rails = 1
-let g:rubycomplete_load_gemfile = 1
-let g:rubycomplete_use_bundler = 1
-
-" neomake
-let g:neomake_ruby_enabled_makers = []
-
-" supertab
-let g:SuperTabDefaultCompletionType = "context"
-
-" lightline
-let g:lightline = {
-            \ 'colorscheme': 'jellybeans',
-            \ 'mode_map': { 'c': 'NORMAL' },
-            \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
-            \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
-            \ },
-            \ 'component_function': {
-            \   'modified': 'LightLineModified',
-            \   'readonly': 'LightLineReadonly',
-            \   'fugitive': 'LightLineFugitive',
-            \   'filename': 'LightLineFilename',
-            \   'fileformat': 'LightLineFileformat',
-            \   'filetype': 'LightLineFiletype',
-            \   'fileencoding': 'LightLineFileencoding',
-            \   'mode': 'LightLineMode',
-            \ },
-            \ 'separator': { 'left': '', 'right': '' },
-            \ 'subseparator': { 'left': '', 'right': '' }
-            \ }
-
-function! LightLineModified()
-    return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-function! LightLineReadonly()
-    return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? '' : ''
-endfunction
-
-function! LightLineFilename()
-    return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-                \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-                \  &ft == 'unite' ? unite#get_status_string() :
-                \  &ft == 'vimshell' ? vimshell#get_status_string() :
-                \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-                \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-endfunction
-
-function! LightLineFugitive()
-    if &ft !~? 'vimfiler\|gundo' && exists("*fugitive#head")
-        let _ = fugitive#head()
-        return strlen(_) ? ' '._ : ''
-    endif
-    return ''
-endfunction
-
-function! LightLineFileformat()
-    return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-
-function! LightLineFiletype()
-    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-endfunction
-
-function! LightLineFileencoding()
-    return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-endfunction
-
-function! LightLineMode()
-    return winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
+nnoremap <leader>a :Rg<space>
 
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+" format json
+nnoremap <leader>j :%!python -m json.tool<cr>
