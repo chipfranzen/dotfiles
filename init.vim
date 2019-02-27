@@ -32,11 +32,16 @@ set noerrorbells visualbell t_vb=
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 
-"This unsets the 'last search pattern' register by hitting return
+
+"This unsets the "last search pattern" register by hitting return
 nnoremap <CR> :noh<CR><CR>
 
 if (has("termguicolors"))
   set termguicolors
+endif
+
+if (has("guifont"))
+  set guifont=Fira\ Code
 endif
 
 set inccommand=nosplit
@@ -52,6 +57,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
@@ -60,30 +66,12 @@ Plug 'tpope/vim-vinegar'
 " ruby
 Plug 'vim-ruby/vim-ruby'
 
-" language server
-Plug 'autozimu/LanguageClient-neovim', {
-  \ 'branch': 'next',
-  \ 'do': 'bash install.sh',
-  \ }
-
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'ncm2/ncm2'
-" Plug 'roxma/nvim-yarp'
-
-" linting
-Plug 'w0rp/ale'
-
 " utilities
 Plug 'neomake/neomake'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'itchyny/lightline.vim'
-Plug 'maximbaz/lightline-ale'
+Plug 'ervandew/supertab'
 Plug 'kien/rainbow_parentheses.vim'
-
-Plug 'sgur/vim-editorconfig'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'mhinz/vim-signify'
-Plug 'christoomey/vim-tmux-navigator'
 
 " terraform
 Plug 'hashivim/vim-terraform'
@@ -91,19 +79,16 @@ Plug 'hashivim/vim-terraform'
 " themes
 Plug 'nanotech/jellybeans.vim'
 Plug 'flazz/vim-colorschemes'
-Plug 'KeitaNakamura/neodark.vim'
 call plug#end()
 
 " theme
 set background=dark
-" colorscheme gruvbox
-colorscheme neodark
-let g:neodark#solid_vertsplit = 1
+colorscheme gruvbox
 
 " keybindings
 let mapleader = "\<Space>"
 nnoremap <silent> <leader>ev :edit $HOME/.config/nvim/init.vim<cr>
-nnoremap <silent> <leader>sv :source $HOME/.config/nvim/init.vim<cr>
+nnoremap <silent> <leader>so :source $HOME/.config/nvim/init.vim<cr>
 
 nnoremap <silent> <leader>l :redraw!<cr>:nohl<cr><esc>
 nnoremap <silent> <leader>v :vsplit<cr><c-w>l
@@ -111,8 +96,6 @@ nnoremap <silent> <leader>h :split<cr><c-w>j
 nnoremap <silent> <leader>w :write<cr>
 nnoremap <silent> <leader>q :quit<cr>
 nnoremap <silent> <leader>Q :qall<cr>
-
-nnoremap <silent> <leader>js :%!python -m json.tool<cr>
 
 " fzf
 nnoremap <silent> <leader>p :call fzf#run({ 'source': 'ag -g ""', 'sink': 'e', 'window': 'enew' })<cr>
@@ -151,7 +134,7 @@ let g:SuperTabDefaultCompletionType = "context"
 
 " lightline
 let g:lightline = {
-            \ 'colorscheme': 'neodark',
+            \ 'colorscheme': 'jellybeans',
             \ 'mode_map': { 'c': 'NORMAL' },
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
@@ -167,6 +150,8 @@ let g:lightline = {
             \   'fileencoding': 'LightLineFileencoding',
             \   'mode': 'LightLineMode',
             \ },
+            \ 'separator': { 'left': '', 'right': '' },
+            \ 'subseparator': { 'left': '', 'right': '' }
             \ }
 
 function! LightLineModified()
@@ -214,43 +199,3 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
-
-" auto complete
-set completeopt=noinsert,menuone,noselect
-set shortmess+=c
-
-" autocmd BufEnter * call ncm2#enable_for_buffer()
-
-" inoremap <c-c> <ESC>
-" inoremap <expr> <CR> pumvisible() ? "\<c-y>\<cr>" : "\<CR>"
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" language server
-let g:LanguageClient_serverCommands = {
-  \ 'python': ['pyls'],
-  \ }
-
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<cr>
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<cr>
-inoremap <silent> <C-c> <C-x><C-o>
-
-
-" ale
-let g:ale_sign_column_always = 1
-let g:ale_linters_explicit = 1
-let g:ale_fix_on_save = 1
-let g:ale_lint_on_text_changed = 0
-let g:ale_lint_on_insert_leave = 1
-
-let g:ale_linters = {
-  \ 'python': ['flake8'],
-  \ }
-
-let g:ale_fixers = {
-  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \ 'python': ['black'],
-  \ }
-
-" format json
-nnoremap <leader>j :%!python -m json.tool<cr>
