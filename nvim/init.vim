@@ -60,6 +60,7 @@ Plug 'tpope/vim-vinegar'
 " languages
 Plug 'hashivim/vim-terraform'
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'JuliaEditorSupport/julia-vim'
 
 " language server
 Plug 'autozimu/LanguageClient-neovim', {
@@ -104,8 +105,11 @@ if (has("termguicolors"))
 endif
 
 " python remote plugin
-let g:python_host_prog='/usr/local/bin/python2'
-let g:python3_host_prog='/Library/Frameworks/Python.framework/Versions/3.6/bin/python3'
+let g:python_host_prog = '/usr/local/bin/python2'
+let g:python3_host_prog = $HOME . 'miniconda3/bin/python'
+
+" julia
+let g:default_julia_version = '1.1'
 
 " auto complete
 set completeopt=noinsert,menuone,noselect
@@ -119,9 +123,23 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 autocmd BufEnter * call ncm2#enable_for_buffer()
 
 " language server
+let g:LanguageClient_settingsPath = $HOME . '.config/nvim/settings/json'
 let g:LanguageClient_diagnosticsEnable = 0
+let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
   \ 'python': ['pyls'],
+  \ 'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
+  \     using LanguageServer;
+  \     using Pkg;
+  \     import StaticLint;
+  \     import SymbolServer;
+  \     env_path = dirname(Pkg.Types.Context().env.project_file);
+  \     debug = false;
+  \
+  \     server = LanguageServer.LanguageServerInstance(stdin, stdout, debug, env_path, "", Dict());
+  \     server.runlinter = true;
+  \     run(server);
+  \ ']
   \ }
 
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<cr>
