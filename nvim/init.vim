@@ -106,7 +106,7 @@ endif
 
 " python remote plugin
 let g:python_host_prog = '/usr/local/bin/python2'
-let g:python3_host_prog = $HOME . 'miniconda3/bin/python'
+let g:python3_host_prog = $HOME . '/miniconda3/bin/python'
 
 " julia
 let g:default_julia_version = '1.1'
