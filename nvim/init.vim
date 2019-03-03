@@ -123,7 +123,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 autocmd BufEnter * call ncm2#enable_for_buffer()
 
 " language server
-let g:LanguageClient_settingsPath = $HOME . '.config/nvim/settings/json'
+let g:LanguageClient_settingsPath = $HOME . '/.config/nvim/settings.json'
 let g:LanguageClient_diagnosticsEnable = 0
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
@@ -141,8 +141,8 @@ let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_insert_leave = 1
 let g:ale_set_highlights = 0
 
-let g:ale_sign_warning = ''
-let g:ale_sign_error = ''
+let g:ale_sign_warning = '⚠︎'
+let g:ale_sign_error = '⁇'
 
 
 let g:ale_linters = {
