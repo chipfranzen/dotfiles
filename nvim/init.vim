@@ -61,6 +61,9 @@ Plug 'tpope/vim-vinegar'
 Plug 'hashivim/vim-terraform'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'JuliaEditorSupport/julia-vim'
+Plug 'andys8/vim-elm-syntax'
+Plug 'tomlion/vim-solidity'
+Plug 'rust-lang/rust.vim'
 
 " language server
 Plug 'autozimu/LanguageClient-neovim', {
@@ -88,12 +91,16 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'mhinz/vim-signify'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kien/rainbow_parentheses.vim'
+Plug 'scrooloose/nerdtree'
 
 " themes
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'KeitaNakamura/neodark.vim'
 
 call plug#end()
+
+syntax enable
+filetype plugin indent on
 
 " colorscheme
 set background=dark
@@ -109,7 +116,7 @@ let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = $HOME . '/miniconda3/bin/python'
 
 " julia
-let g:default_julia_version = '1.1'
+let g:default_julia_version = '1.4'
 
 " auto complete
 set completeopt=noinsert,menuone,noselect
@@ -128,6 +135,7 @@ let g:LanguageClient_diagnosticsEnable = 0
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
   \ 'python': ['pyls'],
+  \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
   \ }
 
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<cr>
@@ -142,7 +150,7 @@ let g:ale_lint_on_insert_leave = 1
 let g:ale_set_highlights = 0
 
 let g:ale_sign_warning = '⚠︎'
-let g:ale_sign_error = '⁇'
+let g:ale_sign_error = '⨂'
 
 
 let g:ale_linters = {
@@ -191,8 +199,8 @@ let g:lightline = {
 	\ 'subseparator': { 'left': '', 'right': '' },
   \ }
 
-let g:lightline#ale#indicator_warnings = ' '
-let g:lightline#ale#indicator_errors = ' '
+let g:lightline#ale#indicator_warnings = '⚠︎ '
+let g:lightline#ale#indicator_errors = '⨂ '
 
 function! LightLineMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
@@ -267,3 +275,11 @@ au Syntax * RainbowParenthesesLoadBraces
 
 " format json
 nnoremap <leader>j :%!python -m json.tool<cr>
+
+autocmd Filetype julia setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+
+" NerdTree
+nnoremap <leader>t :NERDTreeToggle<CR>
+
+" RustFmt
+let g:rustfmt_autosave = 1
