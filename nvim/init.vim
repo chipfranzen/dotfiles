@@ -132,14 +132,14 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 " language server
 let g:LanguageClient_settingsPath = $HOME . '/.config/nvim/settings.json'
 let g:LanguageClient_diagnosticsEnable = 0
-let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
   \ 'python': ['pyls'],
-  \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+  \ 'rust': ['rustup', 'run', 'stable', 'rls'],
   \ }
 
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<cr>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<cr>
+nnoremap <silent> gr :call LanguageClient#textDocument_rename()<cr>
 
 " ale
 let g:ale_sign_column_always = 1
