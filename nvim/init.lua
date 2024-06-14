@@ -27,6 +27,7 @@ vim.o.hlsearch = true
 vim.keymap.set('n', '<cr>', ':noh<cr><cr>')
 
 vim.o.mouse = 'a'
+vim.opt.colorcolumn = "100"
 
 -- plugins
 local Plug = vim.fn['plug#']
@@ -88,8 +89,8 @@ Plug'nvim-telescope/telescope-fzf-native.nvim'
 
 -- linting/formatting
 Plug'jose-elias-alvarez/null-ls.nvim'
-vim.call('plug#end')
 
+vim.call('plug#end')
 
 -- Global mappings.
 -- set leader key to space
@@ -208,8 +209,20 @@ local mason_lspconfig = require 'mason-lspconfig'
 mason_lspconfig.setup {
     ensure_installed = { "pyright" }
 }
+
 require("lspconfig").pyright.setup {
     capabilities = capabilities,
+}
+
+require'lspconfig'.lua_ls.setup{
+    settings = {
+    Lua = {
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+    },
+  },
 }
 
 -- treesitter
