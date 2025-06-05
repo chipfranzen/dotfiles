@@ -2,6 +2,7 @@ return {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
+		lazy = false,
 		priority = 1000,
 		config = function()
 			vim.cmd.colorscheme("catppuccin")
@@ -15,6 +16,19 @@ return {
 		--   vim.cmd.colorscheme("nightfox")
 		-- end,
 	},
+	{ "tpope/vim-fugitive" },
+	{ "tpope/vim-repeat" },
+	{ "alexghergh/nvim-tmux-navigation" },
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy", -- load after startup
+		config = function()
+			require("which-key").setup({
+				-- you can add config options here later if needed
+			})
+		end,
+	},
+
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
@@ -63,6 +77,7 @@ return {
 	{
 		"nvim-tree/nvim-tree.lua",
 		lazy = false,
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		keys = {
 			{ "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle file tree" } },
 			{ "<leader>o", "<cmd>NvimTreeFocus<cr>", { desc = "Focus file tree" } },
@@ -102,6 +117,24 @@ return {
 				},
 			})
 			pcall(require("telescope").load_extension, "fzf")
+		end,
+	},
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = { theme = "catpuccin" },
+	},
+	{
+		"cappyzawa/trim.nvim",
+		config = function()
+			require("trim").setup({
+				trim_on_write = true,
+				trim_trailing_lines = true,
+				-- Disable when multiple cursors are active
+				disable_in_multi_cursor = true,
+				-- Don't show notifications when trimming
+				highlight_on_trim = false,
+			})
 		end,
 	},
 }

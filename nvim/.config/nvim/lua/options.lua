@@ -24,6 +24,7 @@ vim.opt.shortmess:append("c")
 vim.opt.signcolumn = "yes"
 vim.opt.termguicolors = true
 vim.opt.wrap = false
+vim.opt.showmode = false
 
 -- Performance
 vim.opt.timeoutlen = 500
