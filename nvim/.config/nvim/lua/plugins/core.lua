@@ -8,6 +8,7 @@ return {
 			vim.cmd.colorscheme("catppuccin")
 		end,
 	},
+
 	{
 		"EdenEast/nightfox.nvim",
 		name = "nightfox",
@@ -16,9 +17,11 @@ return {
 		--   vim.cmd.colorscheme("nightfox")
 		-- end,
 	},
+
 	{ "tpope/vim-fugitive" },
 	{ "tpope/vim-repeat" },
 	{ "alexghergh/nvim-tmux-navigation" },
+
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy", -- load after startup
@@ -62,20 +65,21 @@ return {
 			})
 		end,
 	},
+
 	{
 		"HiPhish/rainbow-delimiters.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 	},
+
 	{
 		"kylechui/nvim-surround",
 		version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
 		event = "VeryLazy",
 		config = function()
-			require("nvim-surround").setup({
-				-- Configuration here, or leave empty to use defaults
-			})
+			require("nvim-surround").setup({})
 		end,
 	},
+
 	{
 		"nvim-tree/nvim-tree.lua",
 		lazy = false,
@@ -93,6 +97,7 @@ return {
 			})
 		end,
 	},
+
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
@@ -121,11 +126,13 @@ return {
 			pcall(require("telescope").load_extension, "fzf")
 		end,
 	},
+
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = { theme = "catpuccin" },
 	},
+
 	{
 		"cappyzawa/trim.nvim",
 		config = function()
@@ -137,6 +144,31 @@ return {
 				-- Don't show notifications when trimming
 				highlight_on_trim = false,
 			})
+		end,
+	},
+
+	{
+		"akinsho/bufferline.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("bufferline").setup({
+				options = {
+					numbers = "none",
+					offsets = {
+						{
+							filetype = "NvimTree",
+							text = "File Explorer",
+							highlight = "Directory",
+							separator = true,
+						},
+					},
+					show_buffer_icons = true,
+					show_buffer_close_icons = true,
+					separator_style = "slant",
+				},
+			})
+			vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { silent = true })
+			vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { silent = true })
 		end,
 	},
 }

@@ -36,6 +36,7 @@ return {
 			},
 		},
 	},
+
 	{
 		"lewis6991/gitsigns.nvim",
 		event = { "BufReadPre", "BufNewFile" }, -- load lazily when opening files
