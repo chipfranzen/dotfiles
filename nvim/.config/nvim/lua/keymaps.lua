@@ -17,6 +17,7 @@ vim.keymap.set("n", "<leader>h", ":split<cr><c-w>l", { desc = "create vertical s
 -- save and quit
 vim.keymap.set("n", "<leader>w", ":write<cr>", { desc = "write current file" })
 vim.keymap.set("n", "<leader>q", ":quit<cr>", { desc = "quit" })
+vim.keymap.set("n", "<leader>Q", ":qa<cr>", { desc = "quit all" })
 vim.keymap.set("n", "Y", "y$", { desc = "yank until end of line" })
 
 -- vim.keymap.set('n', '<leader>j', ':%!python -m json.tool<cr>', {desc = 'format json'})
