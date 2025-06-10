@@ -174,4 +174,15 @@ return {
       vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { silent = true })
     end,
   },
+
+  {
+    "stevearc/oil.nvim",
+    opts = {},
+    dependencies = { { "nvim-tree/nvim-web-devicons" } },
+    lazy = false,
+    cmd = "Oil",
+    keys = {
+      { "-", "<CMD>Oil<CR>", { desc = "Open parent directory" } },
+    },
+  },
 }
