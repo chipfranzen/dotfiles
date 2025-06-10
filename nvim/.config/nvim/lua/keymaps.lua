@@ -19,7 +19,7 @@ vim.keymap.set("n", "<leader>w", ":write<cr>", { desc = "write current file" })
 vim.keymap.set("n", "<leader>q", ":quit<cr>", { desc = "quit" })
 vim.keymap.set("n", "Y", "y$", { desc = "yank until end of line" })
 
--- vim.keymap.set('n', '<leader>j', ':%!python -m json.tool<cr>', {desc = 'format json'})
+vim.keymap.set("n", "<leader>j", ":%!python -m json.tool<cr>", { desc = "format json" })
 
 vim.keymap.set("n", "<leader>c", function()
   local path = vim.fn.expand("%:p")
