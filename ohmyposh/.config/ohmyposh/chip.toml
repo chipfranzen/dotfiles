@@ -44,14 +44,20 @@ newline = true
 [[blocks.segments]]
 type = "os"
 style = "plain"
-foreground = "p:mauve"
-template = '{{ .Icon }} '
+foreground = "p:red"
+template = '{{ .Icon }}  '
 
 [[blocks.segments]]
 type = "session"
 style = "plain"
-foreground = "p:blue"
-template = '{{ .UserName }}:'
+foreground = "p:yellow"
+template = '{{ .UserName }}'
+
+[[blocks.segments]]
+type = 'text'
+style = 'plain'
+foreground = 'p:overlay2'
+template = ' ::'
 
 [[blocks.segments]]
 type = 'path'
@@ -62,10 +68,16 @@ foreground = 'p:green'
 style = 'full'
 
 [[blocks.segments]]
+type = 'text'
+style = 'plain'
+foreground = 'p:overlay2'
+template = 'on '
+
+[[blocks.segments]]
 type = 'git'
 style = 'plain'
-foreground = 'p:overlay1'
-template = 'on {{ .HEAD }}'
+foreground = 'p:blue'
+template = '{{ .HEAD }}'
 
 [blocks.segments.properties]
 branch_icon = ''
@@ -80,6 +92,6 @@ type = 'text'
 style = 'plain'
 foreground_templates = [
   "{{if gt .Code 0}}p:red{{end}}",
-  "{{if eq .Code 0}}p:yellow{{end}}",
+  "{{if eq .Code 0}}p:mauve{{end}}",
 ]
 template = "<b>❯</b>"
