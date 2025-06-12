@@ -5,7 +5,7 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme("catppuccin")
+      vim.cmd.colorscheme("catppuccin-mocha")
     end,
   },
 
@@ -21,6 +21,11 @@ return {
   { "tpope/vim-fugitive" },
   { "tpope/vim-repeat" },
   { "alexghergh/nvim-tmux-navigation" },
+
+  {
+    "norcalli/nvim-colorizer.lua",
+    lazy = false,
+  },
 
   {
     "folke/which-key.nvim",

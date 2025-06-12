@@ -1,0 +1,17 @@
+[font]
+size = 16.0
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[window]
+opacity = 0.9
+blur = true
+padding = { x = 4, y = 2 }
+
+[general]
+import = ["~/.config/alacritty/catppuccin/catppuccin-macchiato.toml"]
+
+[colors.normal]
+black = "#24273a"

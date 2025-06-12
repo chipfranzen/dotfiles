@@ -1,0 +1,139 @@
+@import url("themes/macchiato.css");
+
+* {
+  font-family: "JetBrainsMono Nerd Font", regular;
+  font-size: 20px;
+  border: none;
+  padding: 2px 6px;
+  margin: 0;
+  min-height: 0;
+  font-weight: 800
+}
+
+window#waybar {
+  background-color: transparent;
+  color: @text;
+}
+
+#workspaces button {
+  background: transparent;
+  padding: 0 4px;
+  border-radius: 9999px;
+  margin: 12px 0;
+}
+
+#workspaces button.urgent {
+  background: @peach;
+  color: @crust;
+}
+
+/* Focused workspaces */
+#workspaces button#sway-workspace-1.focused {
+  background: @red;
+  color: @crust;
+}
+#workspaces button#sway-workspace-2.focused {
+  background: @yellow;
+  color: @crust;
+}
+#workspaces button#sway-workspace-3.focused {
+  background: @green;
+  color: @crust;
+}
+#workspaces button#sway-workspace-4.focused {
+  background: @blue;
+  color: @crust;
+}
+#workspaces button#sway-workspace-5.focused {
+  background: @mauve;
+  color: @crust;
+}
+#workspaces button#sway-workspace-6.focused {
+  background: @red;
+  color: @crust;
+}
+#workspaces button#sway-workspace-7.focused {
+  background: @yellow;
+  color: @crust;
+}
+#workspaces button#sway-workspace-8.focused {
+  background: @green;
+  color: @crust;
+}
+#workspaces button#sway-workspace-9.focused {
+  background: @blue;
+  color: @crust;
+}
+#workspaces button#sway-workspace-10.focused {
+  background: @mauve;
+  color: @crust;
+}
+
+/* Inactive workspaces */
+#workspaces button#sway-workspace-1 {
+  color: @red;
+}
+#workspaces button#sway-workspace-2 {
+  color: @yellow;
+}
+#workspaces button#sway-workspace-3 {
+  color: @green;
+}
+#workspaces button#sway-workspace-4 {
+  color: @blue;
+}
+#workspaces button#sway-workspace-5 {
+  color: @mauve;
+}
+#workspaces button#sway-workspace-6 {
+  color: @red;
+}
+#workspaces button#sway-workspace-7 {
+  color: @yellow;
+}
+#workspaces button#sway-workspace-8 {
+  color: @green;
+}
+#workspaces button#sway-workspace-9 {
+  color: @blue;
+}
+#workspaces button#sway-workspace-10 {
+  color: @mauve;
+}
+
+#clock, #battery, #network, #pulseaudio, #language {
+  background: transparent;
+}
+
+#pulseaudio {
+  color: @red;
+  margin-right: 5px;
+}
+
+#network {
+  color: @yellow;
+  margin-right: 10px;
+}
+
+#battery {
+  color: @green;
+}
+
+#language {
+  color: @blue;
+}
+
+#clock {
+  color: @mauve;
+}
+
+#custom-rainbow {
+  font-size: 38px;
+  font-family: "JetBrainsMono Nerd Font", "Noto Color Emoji", monospace;
+  padding: 0 6px;
+  background: transparent;
+}
+
+#custom-rainbow span {
+  padding: 2px 2px;
+}
