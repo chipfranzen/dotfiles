@@ -71,7 +71,7 @@ style = 'full'
 type = 'text'
 style = 'plain'
 foreground = 'p:overlay2'
-template = 'on '
+template = '{{ if .Segments.Contains "Git" }}on {{ else }}{{ end }}'
 
 [[blocks.segments]]
 type = 'git'
