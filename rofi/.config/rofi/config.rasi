@@ -1,0 +1,4 @@
+configuration {
+  font: "JetBrainsMono Nerd Font 16";
+}
+@theme "catppuccin-default"

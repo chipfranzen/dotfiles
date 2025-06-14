@@ -1,0 +1,61 @@
+// -*- mode: jsonc -*-
+{
+  "spacing": 4,
+  "modules-left": [
+    "sway/workspaces"
+  ],
+  "modules-right": [
+    "pulseaudio",
+    "network",
+    "battery",
+    "sway/language",
+    "clock",
+  ],
+
+  "modules-center": [
+    "custom/rainbow"
+  ],
+
+  "custom/rainbow": {
+    "exec": "echo '<span foreground=\"#ed8796\">●</span> <span foreground=\"#eed49f\">●</span> <span foreground=\"#a6da95\">●</span> <span foreground=\"#8aadf4\">●</span> <span foreground=\"#c6a0f6\">●</span>'",
+    "return-type": "markup",
+    "interval": 3600,
+    "tooltip": false
+  },
+
+  "sway/workspaces": {
+    "all-outputs": true
+  },
+
+  "clock": {
+    "timezone": "America/Los_Angeles",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%Y-%m-%d}"
+  },
+
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-full": "{icon} {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt": "{icon} {time}",
+    "format-icons": ["", "", "", "", ""]
+  },
+
+  "network": {
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-disconnected": "Disconnected ⚠",
+  },
+
+  "pulseaudio": {
+    "format": "{icon}",
+    "format-muted": "",
+    "format-icons": {
+      "default": ["", "", ""]
+    },
+  }
+}

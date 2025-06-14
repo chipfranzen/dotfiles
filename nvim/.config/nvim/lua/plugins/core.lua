@@ -5,7 +5,7 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme("catppuccin")
+      vim.cmd.colorscheme("catppuccin-mocha")
     end,
   },
 
@@ -23,12 +23,15 @@ return {
   { "alexghergh/nvim-tmux-navigation" },
 
   {
+    "norcalli/nvim-colorizer.lua",
+    lazy = false,
+  },
+
+  {
     "folke/which-key.nvim",
     event = "VeryLazy", -- load after startup
     config = function()
-      require("which-key").setup({
-        -- you can add config options here later if needed
-      })
+      require("which-key").setup({})
     end,
   },
 

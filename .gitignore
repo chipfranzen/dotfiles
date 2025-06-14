@@ -2,3 +2,4 @@ tags
 tags.lock
 nvim/plugged
 .DS_Store
+.git/
