@@ -31,9 +31,7 @@ return {
     "folke/which-key.nvim",
     event = "VeryLazy", -- load after startup
     config = function()
-      require("which-key").setup({
-        -- you can add config options here later if needed
-      })
+      require("which-key").setup({})
     end,
   },
 

@@ -7,7 +7,7 @@ vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>")
 vim.keymap.set("n", "<leader>ev", ":edit $MYVIMRC<cr>", { desc = "Edit Vim config" })
 vim.keymap.set("n", "<leader>sv", ":source $MYVIMRC<cr>", { desc = "Source Vim config" })
 -- vim.keymap.set('n', '<leader>ek', ':edit ~/.config/kitty/kitty.conf<cr>', {desc = 'Edit kitty config'})
--- vim.keymap.set('n', '<leader>ez', ':edit ~/.zshrc<cr>', {desc = 'zsh config.'})
+vim.keymap.set("n", "<leader>ez", ":edit ~/.zshrc<cr>", { desc = "zsh config." })
 
 -- display
 vim.keymap.set("n", "<leader>l", ":redraw!<cr>:nohl<cr><esc>", { desc = "redraw" })
@@ -37,8 +37,10 @@ vim.keymap.set("n", "Y", "y$", { desc = "yank until end of line" })
 
 vim.keymap.set("n", "<leader>j", ":%!python -m json.tool<cr>", { desc = "format json" })
 
-vim.keymap.set("n", "<leader>c", function()
+vim.keymap.set("n", "<leader>cf", function()
   local path = vim.fn.expand("%:p")
   vim.fn.setreg("+", path)
   print("Copied: " .. path)
 end, { desc = "Copy full file path to clipboard" })
+
+vim.keymap.set("n", "<leader>cb", 'gg"+yG', { desc = "Copy buffer to clipboard" })
