@@ -37,7 +37,7 @@ vim.keymap.set("n", "Y", "y$", { desc = "yank until end of line" })
 
 vim.keymap.set("n", "<leader>j", ":%!python -m json.tool<cr>", { desc = "format json" })
 
-vim.keymap.set("n", "<leader>cf", function()
+vim.keymap.set("n", "<leader>cc", function()
   local path = vim.fn.expand("%:p")
   vim.fn.setreg("+", path)
   print("Copied: " .. path)
