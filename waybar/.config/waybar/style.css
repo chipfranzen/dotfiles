@@ -17,9 +17,9 @@ window#waybar {
 
 #workspaces button {
   background: transparent;
-  padding: 0 4px;
   border-radius: 9999px;
-  margin: 12px 0;
+  margin: 8px 0px;
+  padding: 0 0;
 }
 
 #workspaces button.urgent {
