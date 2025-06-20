@@ -18,7 +18,7 @@ vim.keymap.set("n", "<leader>h", ":split<cr><c-w>l", { desc = "create vertical s
 -- -- Toggle diagnostics for the current buffer
 local diagnostics_enabled = true
 
-vim.keymap.set("n", "<leader>d", function()
+vim.keymap.set("n", "<leader>dd", function()
   diagnostics_enabled = not diagnostics_enabled
   if diagnostics_enabled then
     vim.diagnostic.enable(0)

@@ -1,0 +1,30 @@
+(defcfg
+  input  (iokit-name "Keychron K4")
+  output (kext)
+  fallthrough true
+)
+
+;; ACSG
+
+
+(defsrc
+  tab capslock
+  a s d f g h j k l ;
+)
+
+(defalias
+  alt_a (tap-hold-next-release 200 a lalt)
+  ctl_s (tap-hold-next-release 200 s lctl)
+  sft_d (tap-hold-next-release 200 d lsft)
+  met_f (tap-hold-next-release 200 f lmet)
+
+  met_j (tap-hold-next-release 200 j rmet)
+  sft_k (tap-hold-next-release 200 k rsft)
+  ctl_l (tap-hold-next-release 200 l rctl)
+  alt_; (tap-hold-next-release 200 ; lalt)
+)
+
+(deflayer homerowmods
+  capslock tab
+  @alt_a @ctl_s @sft_d @met_f g h @met_j @sft_k @ctl_l @alt_;
+)

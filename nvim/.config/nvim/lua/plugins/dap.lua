@@ -1,0 +1,150 @@
+return {
+  -- {
+  --   "mfussenegger/nvim-dap",
+  --   dependencies = {
+  --     -- UI for debugging
+  --     {
+  --       "rcarriga/nvim-dap-ui",
+  --       dependencies = { "nvim-neotest/nvim-nio" },
+  --       config = function()
+  --         require("dapui").setup()
+  --       end,
+  --     },
+  --
+  --     -- Virtual text for debugging
+  --     {
+  --       "theHamsta/nvim-dap-virtual-text",
+  --       config = function()
+  --         require("nvim-dap-virtual-text").setup()
+  --       end,
+  --     },
+  --
+  --     -- Python specific debug configurations
+  --     {
+  --       "mfussenegger/nvim-dap-python",
+  --       config = function()
+  --         -- This assumes debugpy is installed via Mason
+  --         local mason_path = vim.fn.stdpath("data") .. "/mason"
+  --         local python_path = mason_path .. "/packages/debugpy/venv/bin/python"
+  --         require("dap-python").setup(python_path)
+  --       end,
+  --     },
+  --   },
+  --
+  --   config = function()
+  --     local dap = require("dap")
+  --     local dapui = require("dapui")
+  --
+  --     -- Automatically open/close DAP UI
+  --     dap.listeners.after.event_initialized["dapui_config"] = function()
+  --       dapui.open()
+  --     end
+  --     dap.listeners.before.event_terminated["dapui_config"] = function()
+  --       dapui.close()
+  --     end
+  --     dap.listeners.before.event_exited["dapui_config"] = function()
+  --       dapui.close()
+  --     end
+  --
+  --     -- Better breakpoint symbols using Nerd Fonts
+  --     vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+  --     vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+  --     vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DapLogPoint", linehl = "", numhl = "" })
+  --     vim.fn.sign_define(
+  --       "DapStopped",
+  --       { text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" }
+  --     )
+  --     vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+  --   end,
+  --
+  --   keys = {
+  --     -- Debugging keymaps
+  --     {
+  --       "<leader>db",
+  --       function()
+  --         require("dap").toggle_breakpoint()
+  --       end,
+  --       desc = "Toggle Breakpoint",
+  --     },
+  --     {
+  --       "<leader>dB",
+  --       function()
+  --         require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+  --       end,
+  --       desc = "Conditional Breakpoint",
+  --     },
+  --     {
+  --       "<leader>dc",
+  --       function()
+  --         require("dap").continue()
+  --       end,
+  --       desc = "Continue",
+  --     },
+  --     {
+  --       "<leader>do",
+  --       function()
+  --         require("dap").step_over()
+  --       end,
+  --       desc = "Step Over",
+  --     },
+  --     {
+  --       "<leader>di",
+  --       function()
+  --         require("dap").step_into()
+  --       end,
+  --       desc = "Step Into",
+  --     },
+  --     {
+  --       "<leader>dO",
+  --       function()
+  --         require("dap").step_out()
+  --       end,
+  --       desc = "Step Out",
+  --     },
+  --     {
+  --       "<leader>dr",
+  --       function()
+  --         require("dap").repl.open()
+  --       end,
+  --       desc = "Open REPL",
+  --     },
+  --     {
+  --       "<leader>dl",
+  --       function()
+  --         require("dap").run_last()
+  --       end,
+  --       desc = "Run Last",
+  --     },
+  --     {
+  --       "<leader>dt",
+  --       function()
+  --         require("dap").terminate()
+  --       end,
+  --       desc = "Terminate",
+  --     },
+  --     {
+  --       "<leader>du",
+  --       function()
+  --         require("dapui").toggle()
+  --       end,
+  --       desc = "Toggle DAP UI",
+  --     },
+  --
+  --     -- Python specific test debugging
+  --     {
+  --       "<leader>dpm",
+  --       function()
+  --         require("dap-python").test_method()
+  --       end,
+  --       desc = "Debug Python Test Method",
+  --     },
+  --     {
+  --       "<leader>dpc",
+  --       function()
+  --         require("dap-python").test_class()
+  --       end,
+  --       desc = "Debug Python Test Class",
+  --     },
+  --   },
+  -- },
+}
