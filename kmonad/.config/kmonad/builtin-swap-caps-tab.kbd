@@ -2,28 +2,14 @@
   input  (device-file "/dev/input/event3")
   output (uinput-sink "kmonad-virtual")
   fallthrough true
-  allow-cmd true
 )
 
 ;; Define the keys we want to use in layers
 (defsrc
-  esc f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12
   tab capslock
-  q w e r t y u i o p
-  a s d f g h j k l
-  z x c v b n m
-  space enter backspace
-  lshift rshift lctrl rctrl lalt ralt
 )
 
 ;; Define one layer: swap tab and capslock
 (deflayer base
-  esc f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12
   capslock tab
-  q w e r t y u i o p
-  a s d f g h j k l
-  z x c v b n m
-  space enter backspace
-  lshift rshift lctrl rctrl lalt ralt
 )
-

@@ -3,3 +3,5 @@ tags.lock
 nvim/plugged
 .DS_Store
 .git/
+lazy-lock.json
+tmux/.config/tmux/plugins

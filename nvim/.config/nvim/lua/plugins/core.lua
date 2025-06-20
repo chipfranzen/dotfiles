@@ -5,7 +5,16 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme("catppuccin-mocha")
+      require("catppuccin").setup({
+        flavor = "mocha",
+        transparent_background = false,
+        integrations = {
+          lsp_trouble = true,
+          mason = true,
+          which_key = true,
+        },
+      })
+      vim.cmd.colorscheme("catppuccin")
     end,
   },
 
@@ -46,6 +55,7 @@ return {
         ensure_installed = {
           "bash",
           "diff",
+          "dockerfile",
           "gitcommit",
           "json",
           "lua",
@@ -60,7 +70,8 @@ return {
         auto_install = true,
         highlight = {
           enable = true,
-          additional_vim_regex_highlighting = { "gitcommit" },
+          disable = { "dockerfile" },
+          additional_vim_regex_highlighting = { "gitcommit", "dockerfile" },
         },
         indent = {
           enable = true,
@@ -95,11 +106,10 @@ return {
     config = function()
       require("nvim-tree").setup({
         diagnostics = { enable = false },
+        filters = { dotfiles = true },
         git = { enable = false },
         update_focused_file = { enable = true },
-        view = {
-          width = 20,
-        },
+        view = { width = 20 },
       })
     end,
   },
@@ -127,6 +137,11 @@ return {
           layout_config = { prompt_position = "top" },
           sorting_strategy = "ascending",
           winblend = 10,
+        },
+        pickers = {
+          find_files = {
+            hidden = true,
+          },
         },
       })
       pcall(require("telescope").load_extension, "fzf")
@@ -180,7 +195,7 @@ return {
 
   {
     "stevearc/oil.nvim",
-    opts = {},
+    opts = { view_options = { show_hidden = true } },
     dependencies = { { "nvim-tree/nvim-web-devicons" } },
     lazy = false,
     cmd = "Oil",

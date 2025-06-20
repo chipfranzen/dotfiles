@@ -1,23 +1,22 @@
 return {
   {
     "mason-org/mason-lspconfig.nvim",
-    version = "^1.0.0",
+    -- version = "^1.0.0",
     opts = {
       ensure_installed = { "lua_ls", "bashls", "pyright", "ruff", "taplo" },
     },
     dependencies = {
       {
         "mason-org/mason.nvim",
-        version = "^1.0.0",
-        opts = {}
-      }
-      ,
+        -- version = "^1.0.0",
+        opts = {},
+      },
       {
         "neovim/nvim-lspconfig",
         keys = {
-          { "gd",         vim.lsp.buf.definition,  desc = "Go to definition" },
-          { "K",          vim.lsp.buf.hover,       desc = "Hover info" },
-          { "<leader>rn", vim.lsp.buf.rename,      desc = "Rename" },
+          { "gd", vim.lsp.buf.definition, desc = "Go to definition" },
+          { "K", vim.lsp.buf.hover, desc = "Hover info" },
+          { "<leader>rn", vim.lsp.buf.rename, desc = "Rename" },
           { "<leader>ca", vim.lsp.buf.code_action, desc = "Code action" },
         },
         config = function()
