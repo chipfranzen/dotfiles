@@ -5,3 +5,5 @@ nvim/plugged
 .git/
 lazy-lock.json
 tmux/.config/tmux/plugins
+alacritty/.config/alacritty/catppuccin
+rofi/.config/rofi/catppuccin
