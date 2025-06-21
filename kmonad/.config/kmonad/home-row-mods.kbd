@@ -8,6 +8,7 @@
 
 
 (defsrc
+  tab capslock
   a s d f g h j k l ;
 )
 
@@ -24,5 +25,6 @@
 )
 
 (deflayer homerowmods
+  capslock tab
   @alt_a @ctl_s @sft_d @met_f g h @met_j @sft_k @ctl_l @alt_;
 )
